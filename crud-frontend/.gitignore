@@ -40,3 +40,23 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Ignore application.properties
+src/main/resources/application.properties
+
+# Ignore Eclipse-specific files
+.classpath
+.project
+.settings/
+
+# Ignore Maven output directory
+/target/
+
+# Ignore IDE-specific files
+/.idea
+*.iml
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
