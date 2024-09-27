@@ -1,4 +1,36 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class="navbar-nav">
+    <!-- Left side links -->
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="employees"
+        >Home</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/about">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/contact">Contact</a>
+    </li>
+  </ul>
+
+  <!-- Pushes this section to the right -->
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/register">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Logout</a>
+    </li>
+  </ul>
+</nav>
+
 <h1 class="text-center">{{ title }}</h1>
 <div class="container">
-  <app-employee-list></app-employee-list>
+  <router-outlet></router-outlet>
 </div>
+<footer class="footer">
+  <div class="container">
+    <span>A Project by Meyyappan R</span>
+  </div>
+</footer>
