@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of employees">
+    <tr *ngFor="let employee of filteredEmployees">
       <td>{{ employee.firstName }}</td>
       <td>{{ employee.lastName }}</td>
       <td>{{ employee.emailId }}</td>
@@ -41,6 +41,9 @@
           </div>
         </div>
       </td>
+    </tr>
+    <tr *ngIf="filteredEmployees.length === 0">
+      <td colspan="4" class="text-center">No employees found</td>
     </tr>
   </tbody>
 </table>
