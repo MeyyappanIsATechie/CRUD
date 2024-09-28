@@ -9,9 +9,10 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 import { FormsModule } from '@angular/forms';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeListComponent, CreateEmployeeComponent, UpdateEmployeeComponent, PageNotFoundComponent],
+  declarations: [AppComponent, EmployeeListComponent, CreateEmployeeComponent, UpdateEmployeeComponent, PageNotFoundComponent, ViewEmployeeComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
