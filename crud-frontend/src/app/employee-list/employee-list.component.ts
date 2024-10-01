@@ -5,6 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employee-list',
@@ -16,6 +17,10 @@ export class EmployeeListComponent implements OnInit {
   filteredEmployees: Employee[] = [];
   dataSource!: MatTableDataSource<Employee>;
   displayedColumns: string[] = ['firstName', 'lastName', 'emailId', 'actions'];
+
+  firstNameFilter: string = '';
+  lastNameFilter: string = '';
+  emailFilter: string = '';
 
   // Pagination properties
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,10 +36,10 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
-    this.activeRoute.queryParamMap.subscribe((params) => {
-      const searchTerm = params.get('search') || '';
-      this.applyFilter(searchTerm);
-    });
+    // this.activeRoute.queryParamMap.subscribe((params) => {
+    //   const searchTerm = params.get('search') || '';
+    //   this.applyFilter(searchTerm);
+    // });
   }
 
   getEmployees(): void {
@@ -46,8 +51,29 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string): void {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(): void {
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
+    this.dataSource.filterPredicate = (data: Employee, filter: string) => {
+      const matchFilter = [];
+      const filters = filter.split('|');
+      const firstNameMatch = filters[0]
+        ? data.firstName.toLowerCase().includes(filters[0])
+        : true;
+      const lastNameMatch = filters[1]
+        ? data.lastName.toLowerCase().includes(filters[1])
+        : true;
+      const emailMatch = filters[2]
+        ? data.emailId.toLowerCase().includes(filters[2])
+        : true;
+
+      return firstNameMatch && lastNameMatch && emailMatch;
+    };
+
+    this.dataSource.filter = `${this.firstNameFilter}|${this.lastNameFilter}|${this.emailFilter}`;
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -61,6 +87,22 @@ export class EmployeeListComponent implements OnInit {
   changePageSize(): void {
     this.paginator.pageSize = this.pageSize;
     this.changePage();
+  }
+
+  // Export to Excel
+  exportAsXLSX(): void {
+    const data = this.dataSource.filteredData.map((emp, i) => ({
+      'Sl.No': i + 1,
+      'First Name': emp.firstName,
+      'Last Name': emp.lastName,
+      'Email ID': emp.emailId,
+    }));
+
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Employees');
+    XLSX.writeFile(workbook, 'employees.xlsx');
   }
 
   // Actions
