@@ -9,3 +9,83 @@
   text-align: center;
   color: white;
 }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --table-header-bg: #f0f0f0;
+  --table-row-bg: #ffffff;
+  --button-bg-color: #007bff;
+  --button-text-color: #ffffff;
+  --table-border-color: #ccc;
+}
+
+.dark-theme {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --table-header-bg: #333333;
+  --table-row-bg: #1e1e1e;
+  --button-bg-color: #bb86fc;
+  --button-text-color: #000000;
+  --table-border-color: #444;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+table {
+  background-color: var(--table-row-bg);
+  border: 1px solid var(--table-border-color);
+}
+
+th,
+td {
+  color: var(--text-color);
+  padding: 10px;
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  background-color: var(--table-header-bg);
+}
+
+.mat-paginator {
+  background-color: var(--table-header-bg);
+  color: var(--text-color);
+}
+
+.toggle-theme button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggle-theme button:hover {
+  opacity: 0.8;
+}

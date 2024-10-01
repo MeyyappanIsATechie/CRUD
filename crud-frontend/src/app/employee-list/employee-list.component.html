@@ -1,49 +1,68 @@
 <h2>Employee List</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email Id</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let employee of filteredEmployees">
-      <td>{{ employee.firstName }}</td>
-      <td>{{ employee.lastName }}</td>
-      <td>{{ employee.emailId }}</td>
-      <td>
-        <!--div for edit and delete buttons-->
-        <div class="container">
-          <div class="row">
-            <div class="col-auto">
-              <button (click)="editEmployee(employee.id)" class="btn btn-info">
-                Edit
-              </button>
-            </div>
-            <div class="col-auto">
-              <button
-                (click)="deleteEmployee(employee.id)"
-                class="btn btn-danger"
-              >
-                Delete
-              </button>
-            </div>
-            <div class="col-auto">
-              <button
-                (click)="viewEmployee(employee.id)"
-                class="btn btn-secondary"
-              >
-                View
-              </button>
-            </div>
-          </div>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <!-- Items per page dropdown -->
+      <mat-form-field>
+        <mat-label>Items per page</mat-label>
+        <mat-select [(value)]="pageSize" (selectionChange)="changePageSize()">
+          <mat-option *ngFor="let size of pageSizeOptions" [value]="size">{{
+            size
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.firstName }}</td>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.lastName }}</td>
+    </ng-container>
+
+    <!-- Email Id Column -->
+    <ng-container matColumnDef="emailId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email Id</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.emailId }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let employee">
+        <button (click)="editEmployee(employee.id)" class="btn btn-info">
+          Edit
+        </button>
+        <button
+          (click)="deleteEmployee(employee.id)"
+          class="btn btn-danger"
+          style="margin-right: 2px; margin-left: 5px"
+        >
+          Delete
+        </button>
+        <button (click)="viewEmployee(employee.id)" class="btn btn-secondary">
+          View
+        </button>
       </td>
-    </tr>
-    <tr *ngIf="filteredEmployees.length === 0">
-      <td colspan="4" class="text-center">No employees found</td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <!-- Table Header & Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- Paginator -->
+  <mat-paginator
+    [length]="filteredEmployees.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="changePage()"
+  >
+  </mat-paginator>
+</div>

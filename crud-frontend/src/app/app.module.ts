@@ -10,11 +10,36 @@ import { FormsModule } from '@angular/forms';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeListComponent, CreateEmployeeComponent, UpdateEmployeeComponent, PageNotFoundComponent, ViewEmployeeComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  declarations: [
+    AppComponent,
+    EmployeeListComponent,
+    CreateEmployeeComponent,
+    UpdateEmployeeComponent,
+    PageNotFoundComponent,
+    ViewEmployeeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+  ],
+  providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

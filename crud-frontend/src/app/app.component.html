@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+<nav
+  class="navbar navbar-expand-sm bg-primary navbar-dark d-flex justify-content-between"
+>
+  <!-- Left side links (Home, Add, Contact) -->
   <ul class="navbar-nav">
-    <!-- Left side links -->
     <li class="nav-item">
       <a class="nav-link" routerLinkActive="active" routerLink="employees"
         >Home</a
@@ -14,20 +16,29 @@
     </li>
   </ul>
 
-  <!-- Pushes this section to the right -->
+  <!-- Center search bar -->
+  <form class="d-flex justify-content-center" style="flex-grow: 1">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Search by name"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      style="width: 300px; max-width: 100%"
+    />
+  </form>
+
+  <!-- Right side theme toggle button -->
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link">Logout</a>
+    <li class="nav-item toggle-theme">
+      <button class="btn btn-light ml-2" (click)="toggleTheme()">
+        <ng-container *ngIf="isDarkMode; else lightMode">
+          ☀️ Light Mode
+        </ng-container>
+        <ng-template #lightMode> 🌙 Dark Mode </ng-template>
+      </button>
     </li>
   </ul>
-  <input
-    class="form-control"
-    type="text"
-    placeholder="Search by name"
-    [(ngModel)]="searchTerm"
-    (input)="onSearch()"
-    style="width: 200px; align-items: center"
-  />
 </nav>
 
 <h1 class="text-center">{{ title }}</h1>
