@@ -26,7 +26,7 @@
     <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        First Name
+        <h6 style="color: black; margin-top: 10px">First Name</h6>
         <input
           [(ngModel)]="firstNameFilter"
           (input)="applyFilter()"
@@ -41,7 +41,7 @@
     <!-- Last Name Column -->
     <ng-container matColumnDef="lastName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Last Name
+        <h6 style="color: black; margin-top: 10px">Last Name</h6>
         <input
           [(ngModel)]="lastNameFilter"
           (input)="applyFilter()"
@@ -56,7 +56,7 @@
     <!-- Email Id Column -->
     <ng-container matColumnDef="emailId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Email Id
+        <h6 style="color: black; margin-top: 10px">Email Id</h6>
         <input
           [(ngModel)]="emailFilter"
           (input)="applyFilter()"

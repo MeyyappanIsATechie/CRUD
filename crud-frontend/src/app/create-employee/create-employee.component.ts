@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-employee',
@@ -10,17 +11,23 @@ import { Router } from '@angular/router';
 })
 export class CreateEmployeeComponent implements OnInit {
   employee: Employee = new Employee();
-  constructor(private service: EmployeeService, private router: Router) {}
+  constructor(
+    private service: EmployeeService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
   ngOnInit(): void {}
 
   saveEmployee() {
     this.service.createEmployee(this.employee).subscribe(
       (data) => {
         console.log(data);
+        this.toastr.success('Employee created successfully');
         this.gotToEmployeeList();
       },
       (error) => {
         console.log(error);
+        this.toastr.error('Failed to create employee');
       }
     );
   }

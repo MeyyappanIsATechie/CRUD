@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-expand-sm bg-primary navbar-dark d-flex justify-content-between"
+  class="navbar navbar-expand-sm bg-primary navbar-dark d-flex justify-content-between sticky-top"
 >
   <!-- Left side links (Home, Add, Contact) -->
   <ul class="navbar-nav">
@@ -11,9 +11,9 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="create-employee">Add</a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" routerLink="/contact">Contact</a>
-    </li>
+    </li> -->
   </ul>
 
   <!-- Center search bar -->
@@ -45,8 +45,20 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-<footer class="footer">
+
+<footer class="bg-dark text-white text-center py-3 mt-4">
   <div class="container">
-    <span>A Project by Meyyappan R</span>
+    <p class="mb-0">© 2024 A Project By Meyyappan R. All rights reserved.</p>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a href="/privacy" class="text-white">Privacy Policy</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="/terms" class="text-white">Terms of Service</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="/contact" class="text-white">Contact Us</a>
+      </li>
+    </ul>
   </div>
 </footer>

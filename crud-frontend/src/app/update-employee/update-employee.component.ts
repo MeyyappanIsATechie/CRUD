@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-employee',
@@ -13,7 +14,8 @@ export class UpdateEmployeeComponent implements OnInit {
   id!: number;
   constructor(
     private service: EmployeeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -21,7 +23,10 @@ export class UpdateEmployeeComponent implements OnInit {
       (data: Employee) => {
         this.employee = data;
       },
-      (error) => console.error(error)
+      (error) => {
+        console.error(error);
+        this.toastr.error('Error retrieving employee data');
+      }
     );
   }
 
@@ -30,9 +35,14 @@ export class UpdateEmployeeComponent implements OnInit {
       (response) => {
         console.log(response);
         this.employee = new Employee();
+        alert('updated employee successfully');
+        this.toastr.success('Employee updated successfully');
         this.goBack();
       },
-      (error) => console.error(error)
+      (error) => {
+        console.error(error);
+        this.toastr.error('Error updating employee');
+      }
     );
   }
 
